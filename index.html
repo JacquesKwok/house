@@ -34,6 +34,7 @@
             --radius-md: 8px;
             --radius-sm: 4px;
             --transition: 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --wechat-green: #07C160;
         }
 
         * {
@@ -320,7 +321,7 @@
             flex-shrink: 0;
         }
 
-        /* ---- 新增地址卡片样式 ---- */
+        /* 地址卡片样式 */
         .address-line {
             display: flex;
             align-items: flex-start;
@@ -336,22 +337,23 @@
         }
 
         .address-text {
-            font-size: 15px; 
-            font-weight: 400; 
-            color: var(--text-secondary); 
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
             line-height: 1.7;
             word-break: break-word;
-            letter-spacing: 0.3px;  
+            letter-spacing: 0.3px;
         }
 
         .address-hint {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-tertiary);
             margin-top: 4px;
-            letter-spacing: 0.1px;
+            letter-spacing: 0.2px;
             padding-left: 32px;
         }
 
+        /* ===== 底部联系栏改造 ===== */
         .contact-box {
             position: fixed;
             bottom: 0;
@@ -369,7 +371,8 @@
 
         .contact-info {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: stretch;
             gap: 10px;
             padding: 15px 20px;
             background: #fafaf8;
@@ -378,7 +381,18 @@
             user-select: text;
             -webkit-user-select: text;
             width: 100%;
-            justify-content: center;
+            max-width: 520px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wechat-row {
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
         }
 
         .contact-icon {
@@ -409,6 +423,36 @@
             font-weight: 400;
         }
 
+        .wechat-id {
+            font-family: "SF Mono", "Menlo", "Consolas", monospace;
+            font-size: 15px;
+            color: var(--text-secondary);
+            letter-spacing: 0.4px;
+        }
+
+        .copy-btn {
+            background: var(--wechat-green);
+            color: #fff;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: auto;
+            flex-shrink: 0;
+            transition: background 0.2s ease;
+            line-height: 1.8;
+        }
+
+        .copy-btn:active {
+            background: #06ad56;
+        }
+
+        .copy-btn.copied {
+            background: #999;
+        }
+
         @media (min-width: 420px) {
             .carousel {
                 height: 28vh;
@@ -436,10 +480,13 @@
                 font-size: 18px;
             }
             .address-text {
-                font-size: 17px;
+                font-size: 16px;
             }
             .address-hint {
                 padding-left: 34px;
+            }
+            .wechat-id {
+                font-size: 16px;
             }
         }
 
@@ -465,7 +512,7 @@
                 max-width: 520px;
             }
             .address-text {
-                font-size: 18px;
+                font-size: 16px;
             }
             .address-hint {
                 padding-left: 36px;
@@ -526,11 +573,11 @@
             <div class="price-block">
                 <span class="price-num">25</span>
                 <span class="price-unit">万</span>
-                <span class="price-note">(可议价)</span>
+                <span class="price-note">(单价约0.18万/㎡，可议价)</span>
             </div>
             <div class="base-info">
                 <div class="info-item"><span class="label">建筑面积</span>&nbsp;<span class="value">136.8㎡</span></div>
-                <div class="info-item"><span class="label">户型</span>&nbsp;<span class="value">四室两厅两卫</span></div>
+                <div class="info-item"><span class="label">户型</span>&nbsp;<span class="value">四室一厅两卫</span></div>
                 <div class="info-item"><span class="label">楼层</span>&nbsp;<span class="value">12 / 13层</span></div>
                 <div class="info-item"><span class="label">朝向</span>&nbsp;<span class="value">东西通透</span></div>
                 <div class="info-item"><span class="label">装修</span>&nbsp;<span class="value">毛坯房</span></div>
@@ -542,15 +589,16 @@
             </p>
         </div>
 
-        <!-- ===== 新增地址卡片 ===== -->
+        <!-- 地址卡片 -->
         <div class="card">
-            <h3 class="section-title"><span class="section-icon">📍</span>地址</h3>
+            <h3 class="section-title"><span class="section-icon">📍</span>项目地址</h3>
             <div class="address-line">
                 <span class="address-icon">🏠</span>
                 <span class="address-text">
-                    广东省湛江市遂溪县港门镇石角埠
+                    广东省惠州市惠东县巽寮湾海景花园 3 栋 1202 室
                 </span>
             </div>
+            <div class="address-hint">导航可直达 · 看房请提前联系</div>
         </div>
 
         <div class="card">
@@ -558,7 +606,7 @@
             <div class="highlight-list">
                 <div class="highlight-item">
                     <span class="highlight-dot"></span>
-                    <span>东西通透，通风采光极佳</span>
+                    <span>东西通透，双阳台设计，通风采光极佳</span>
                 </div>
                 <div class="highlight-item">
                     <span class="highlight-dot"></span>
@@ -566,7 +614,7 @@
                 </div>
                 <div class="highlight-item">
                     <span class="highlight-dot"></span>
-                    <span>客餐厅一体，空间开阔</span>
+                    <span>客餐厅一体，面宽4.2米，空间开阔</span>
                 </div>
                 <div class="highlight-item">
                     <span class="highlight-dot"></span>
@@ -580,12 +628,22 @@
         </div>
     </div>
 
-    <!-- 底部联系栏 -->
+    <!-- 底部联系栏（新增添加微信组块） -->
     <div class="contact-box">
         <div class="contact-info">
-            <span class="contact-icon">📞</span>
-            <span class="contact-label">联系电话</span>
-            <span class="contact-phones">13528313258<span class="phone-separator"> / </span>13828068736</span>
+            <!-- 电话行 -->
+            <div class="contact-row">
+                <span class="contact-icon">📞</span>
+                <span class="contact-label">联系电话</span>
+                <span class="contact-phones">13528313258<span class="phone-separator"> / </span>13828068736</span>
+            </div>
+            <!-- 微信行 -->
+            <div class="contact-row wechat-row">
+                <span class="contact-icon">💬</span>
+                <span class="contact-label">添加微信</span>
+                <span class="wechat-id">cl654321love</span>
+                <button class="copy-btn" data-wechat="wxid_123456">复制</button>
+            </div>
         </div>
     </div>
 
@@ -657,6 +715,55 @@
         })();
     </script>
 
+    <!-- 微信复制功能脚本 -->
+    <script>
+        (function() {
+            const copyBtns = document.querySelectorAll('.copy-btn');
+            copyBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const wechatId = this.getAttribute('data-wechat');
+                    if (!wechatId) return;
+
+                    // 复制到剪贴板
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(wechatId).then(() => {
+                            this.textContent = '已复制';
+                            this.classList.add('copied');
+                            setTimeout(() => {
+                                this.textContent = '复制';
+                                this.classList.remove('copied');
+                            }, 2000);
+                        }).catch(() => {
+                            fallbackCopy(this, wechatId);
+                        });
+                    } else {
+                        fallbackCopy(this, wechatId);
+                    }
+                });
+            });
+
+            function fallbackCopy(btn, text) {
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                try {
+                    document.execCommand('copy');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    alert('复制失败，请手动复制微信号：' + text);
+                }
+                document.body.removeChild(input);
+            }
+        })();
+    </script>
+
     <!-- 微信分享卡片增强脚本 -->
     <script>
         (function() {
@@ -673,7 +780,6 @@
                     return;
                 }
 
-                // 好友分享
                 WeixinJSBridge.on('menu:share:appmessage', function() {
                     WeixinJSBridge.invoke('sendAppMessage', {
                         "appid": '',
@@ -686,7 +792,6 @@
                     });
                 });
 
-                // 朋友圈
                 WeixinJSBridge.on('menu:share:timeline', function() {
                     WeixinJSBridge.invoke('shareTimeline', {
                         "img_url": shareData.imgUrl,
@@ -698,7 +803,6 @@
                     });
                 });
 
-                // 主动设置默认分享数据
                 try {
                     WeixinJSBridge.invoke('setPageShareData', {
                         "appid": '',
