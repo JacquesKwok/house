@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>海景房 · 136.8㎡毛坯四室 | 东西通透</title>
     
-    <!-- Open Graph 分享标签 -->
+    <!-- Open Graph 分享标签（图片必须为完整 HTTPS 链接） -->
     <meta property="og:title" content="海景房 · 136.8㎡毛坯四室 | 东西通透">
     <meta property="og:description" content="海景房，毛坯房，采光无遮挡，看房随时联系。">
-    <meta property="og:image" content="img/1.jpg">
+    <meta property="og:image" content="https://house.zguo09331.workers.dev/img/1.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://house.zguo09331.workers.dev/">
     
@@ -49,12 +49,11 @@
             min-height: 100vh;
         }
 
-        /* ========== 轮播区域 - 居中显示 ========== */
         .carousel {
-            width: 80%;
+            width: 100%;
             height: 30vh;
-            max-height: 1000px;
-            min-height: 700px;
+            max-height: 500px;
+            min-height: 300px;
             position: relative;
             overflow: hidden;
             background: #e8e5de;
@@ -142,7 +141,6 @@
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
         }
 
-        /* ========== 主内容区 ========== */
         .content-wrap {
             padding: 0 14px;
             margin-top: -8px;
@@ -317,7 +315,6 @@
             flex-shrink: 0;
         }
 
-        /* ========== 底部联系栏 ========== */
         .contact-box {
             position: fixed;
             bottom: 0;
@@ -375,7 +372,6 @@
             font-weight: 400;
         }
 
-        /* 响应式 */
         @media (min-width: 420px) {
             .carousel {
                 height: 28vh;
@@ -527,7 +523,7 @@
         <div class="contact-info">
             <span class="contact-icon">📞</span>
             <span class="contact-label">联系电话</span>
-            <span class="contact-phones">1352831358<span class="phone-separator"> / </span>13828068736</span>
+            <span class="contact-phones">13528313258<span class="phone-separator"> / </span>13828068736</span>
         </div>
     </div>
 
@@ -596,6 +592,55 @@
 
             autoplayTimer = setInterval(nextSlide, autoplayDelay);
             counter.textContent = '1/' + total;
+        })();
+    </script>
+
+    <!-- 微信分享卡片强制设置（无需公众号签名，通过旧版 API 实现） -->
+    <script>
+        (function() {
+            // 分享数据，请根据实际修改
+            var shareData = {
+                title: '海景房 · 136.8㎡毛坯四室 | 东西通透',
+                desc: '海景房，毛坯房，采光无遮挡，看房随时联系。',
+                link: 'https://house.zguo09331.workers.dev/',
+                imgUrl: 'https://house.zguo09331.workers.dev/img/1.jpg'
+            };
+
+            // 监听 WeixinJSBridge 就绪事件（旧版 API，但多数微信版本仍支持）
+            function setupWeixinShare() {
+                if (typeof WeixinJSBridge === 'undefined') {
+                    document.addEventListener('WeixinJSBridgeReady', setupWeixinShare, false);
+                    return;
+                }
+                // 分享给朋友
+                WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "appid": '',
+                        "img_url": shareData.imgUrl,
+                        "img_width": "200",
+                        "img_height": "200",
+                        "link": shareData.link,
+                        "desc": shareData.desc,
+                        "title": shareData.title
+                    }, function(res) {});
+                });
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": shareData.imgUrl,
+                        "img_width": "200",
+                        "img_height": "200",
+                        "link": shareData.link,
+                        "desc": shareData.desc,
+                        "title": shareData.title
+                    }, function(res) {});
+                });
+            }
+
+            // 如果是微信环境则尝试设置
+            if (/micromessenger/i.test(navigator.userAgent)) {
+                setupWeixinShare();
+            }
         })();
     </script>
 </body>
